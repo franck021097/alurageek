@@ -1,4 +1,6 @@
 import { conectaAPI } from "./conectaAPI.js"
+import { mostrar } from "./mostrarProductos.js"
+
 const enviar = document.querySelector("[data-enviar]");
 const productos = await conectaAPI.listaProductos();
 
@@ -10,6 +12,8 @@ function obtenerDatos(){
     const id = ultimo_id.toString();
 
     conectaAPI.enviarProducto(id, nombre_producto, precio, imagen);
+
+    mostrar.mostrarProductos();
 }
 
 

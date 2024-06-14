@@ -1,4 +1,5 @@
 import { conectaAPI } from "./conectaAPI.js"
+import { mostrar } from "./mostrarProductos.js"
 
 
 window.addEventListener("load", () => {
@@ -14,7 +15,10 @@ function obtenerBotones(obtener){
                 conectaAPI.borrarProducto(button.id)
             };
         });
+
+    mostrar.mostrarProductos();
     }
+
 }
 
 window.addEventListener("click", () => {obtenerBotones(true)});
