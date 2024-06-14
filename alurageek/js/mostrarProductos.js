@@ -33,7 +33,8 @@ async function mostrarProductos(){
     containerProductos.innerHTML = listaProductos;  
 }
 
-mostrarProductos();
+window.addEventListener("load",mostrarProductos());
+
 
 export const mostrar={
     mostrarProductos
