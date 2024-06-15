@@ -1,22 +1,50 @@
 import { conectaAPI } from "./conectaAPI.js"
-import { mostrar } from "./mostrarProductos.js"
+
 
 
 window.addEventListener("load", () => {
     obtenerBotones();
 });
 
-function obtenerBotones(obtener){
+async function obtenerBotones(obtener){
     const botonesBorrar = document.querySelectorAll(".borrar-producto");
 
     if(obtener){
         botonesBorrar.forEach((button) => {
             button.onclick = () => {
-                conectaAPI.borrarProducto(button.id)
+                console.log(button);
+                conectaAPI.borrarProducto(button.id);
             };
         });
 
-    mostrar.mostrarProductos();
+        const containerProductos = document.querySelector("[data-container-productos]");
+        const productos = await conectaAPI.listaProductos();
+    
+        let listaProductos = "";
+    
+        containerProductos.innerHTML = listaProductos;  
+    
+        productos.forEach(element => {
+    
+        listaProductos += 
+        `
+            <div class="producto">
+                                    <div>
+                                        <img src="${element.imagen}" alt="producto" class="img-producto">
+                                    </div>
+                    
+                                    <div class="info-producto">
+                                        <p>${element.nombre_producto}</p>
+                                        <div>
+                                            <p class="precio-producto">$${element.precio}</p>
+                                            <img src="./assets/trash.png" alt="borrar producto" class="borrar-producto" id="${element.id}">
+                                        </div>
+                                    </div>
+                                </div>
+            `
+            }); 
+    
+        containerProductos.innerHTML = listaProductos;  
     }
 
 }
