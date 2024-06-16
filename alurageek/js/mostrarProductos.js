@@ -1,8 +1,8 @@
 import { conectaAPI } from "./conectaAPI.js"
+const containerProductos = document.querySelector("[data-container-productos]");
+const productos = await conectaAPI.listaProductos();
 
-async function mostrarProductos(){
-    const containerProductos = document.querySelector("[data-container-productos]");
-    const productos = await conectaAPI.listaProductos();
+async function mostrarProductos(productos){
     let listaProductos = "";
     containerProductos.innerHTML = listaProductos;
     productos.forEach(element => {
@@ -24,8 +24,8 @@ async function mostrarProductos(){
             `
             }); 
         containerProductos.innerHTML = listaProductos;
-        const elementos = document.querySelectorAll(".borrar-producto");
-        return elementos;
+        
 }
-window.addEventListener("load", () => {mostrarProductos();});
+
+mostrarProductos(productos);
 export const mostrar = {mostrarProductos}

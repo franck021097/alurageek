@@ -1,12 +1,12 @@
 import { conectaAPI } from "./conectaAPI.js"
 import { mostrar } from "./mostrarProductos.js"
-
-
 const contenedorProductos = document.querySelector("[data-container-productos]");
 
-contenedorProductos.addEventListener("click", (event) => {
+contenedorProductos.addEventListener("click", async (event) => {
     event.preventDefault();
-    console.log(event.target.id);
-    conectaAPI.borrarProducto(event.target.id);
-    mostrar.mostrarProductos();
+    if(event.target.alt == "borrar producto"){
+        await conectaAPI.borrarProducto(event.target.id);
+        const nuevaLista = await conectaAPI.listaProductos();
+        mostrar.mostrarProductos(nuevaLista);
+    }
 });
